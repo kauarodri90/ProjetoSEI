@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: sei_user
+      POSTGRES_PASSWORD: sei_pass
+      POSTGRES_DB: sei_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./sei-project-back
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: sei_db
+      DB_USER: sei_user
+      DB_PASS: sei_pass
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+
+  frontend:
+    build: ./sei-project-front
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
