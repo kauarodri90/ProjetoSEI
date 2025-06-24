@@ -15,12 +15,22 @@ export default function SalaFormPage() {
   }, [id]);
 
   const handleSubmit = async (sala) => {
-    if (id) {
-      await api.put(`/salas/${id}`, sala);
-    } else {
-      await api.post('/salas', sala);
+    try {
+      const payload = {
+        ...sala,
+        capacidade: parseInt(sala.capacidade, 10),
+      };
+
+      if (id) {
+        await api.put(`/salas/${id}`, payload);
+      } else {
+        await api.post('/salas', payload);
+      }
+
+      navigate('/salas');
+    } catch (error) {
+      console.error('Erro ao salvar sala:', error);
     }
-    navigate('/salas');
   };
 
   return (

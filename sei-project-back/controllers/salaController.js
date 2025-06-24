@@ -3,6 +3,7 @@ const Sala = require('../models/sala');
 exports.listar = async (req, res) => {
   const where = {};
   if (req.query.nome) where.nome = req.query.nome;
+  where.status = req.query.status || 'ATIVO';
   const salas = await Sala.findAll({ where });
   res.json(salas);
 };

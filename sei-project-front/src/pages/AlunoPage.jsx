@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
-import AlunoForm from '../components/AlunoForm';
 
 const AlunoPage = () => {
   const [alunos, setAlunos] = useState([]);
@@ -26,10 +25,17 @@ const AlunoPage = () => {
   };
 
   return (
-    <div>
-      <h2>Gerenciar Alunos</h2>
-      <button onClick={() => navigate('/alunos/novo')}>Incluir Novo Aluno</button>
-      <table>
+    <div style={{ textAlign: 'center' }}>
+      <h2 style={{ color: '#fff' }}>Gerenciar Alunos</h2>
+
+      <button
+        onClick={() => navigate('/alunos/novo')}
+        className="centered-button"
+      >
+        Incluir Novo Aluno
+      </button>
+
+      <table className="tabela">
         <thead>
           <tr>
             <th>Nome</th>
@@ -45,8 +51,10 @@ const AlunoPage = () => {
               <td>{aluno.matricula}</td>
               <td>{aluno.curso}</td>
               <td>
-                <button onClick={() => navigate(`/alunos/editar/${aluno.id}`)}>Editar</button>
-                <button onClick={() => handleExcluir(aluno.id)}>Excluir</button>
+                <div className="botoes-acoes">
+                  <button onClick={() => navigate(`/alunos/editar/${aluno.id}`)}>Editar</button>
+                  <button onClick={() => handleExcluir(aluno.id)}>Excluir</button>
+                </div>
               </td>
             </tr>
           ))}

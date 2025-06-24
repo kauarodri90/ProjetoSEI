@@ -2,6 +2,7 @@ const Professor = require('../models/professor');
 exports.listar = async (req, res) => {
   const where = {};
   if (req.query.nome) where.nome = req.query.nome;
+  where.status = req.query.status || 'ATIVO';
   const dados = await Professor.findAll({ where });
   res.json(dados);
 };

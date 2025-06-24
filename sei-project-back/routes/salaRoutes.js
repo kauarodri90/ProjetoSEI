@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/salaController');
 
-router.get('/salas', controller.listar);
-router.post('/salas', controller.criar);
-router.put('/salas/:id', controller.atualizar);
-router.patch('/salas/:id/status', controller.atualizarStatus);
+router.get('/', controller.listar);
+router.post('/', controller.criar);
+router.put('/:id', controller.atualizar);
+router.patch('/:id/status', controller.atualizarStatus);
 
 module.exports = router;

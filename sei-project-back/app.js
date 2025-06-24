@@ -14,12 +14,12 @@
   app.use(cors());
   app.use(bodyParser.json());
 
-  app.use('/api', alunoRoutes);
-  app.use('/api', disciplinaRoutes);
-  app.use('/api', professorRoutes);
-  app.use('/api', salaRoutes);
-  app.use('/api', turmaRoutes);
-  app.use('/api', cursoRoutes);
+  app.use('/api/alunos', alunoRoutes);
+  app.use('/api/disciplinas', disciplinaRoutes);
+  app.use('/api/professores', professorRoutes);
+  app.use('/api/salas', salaRoutes);
+  app.use('/api/turmas', turmaRoutes);
+  app.use('/api/cursos', cursoRoutes);
 
 
   const PORT = process.env.PORT || 3000;

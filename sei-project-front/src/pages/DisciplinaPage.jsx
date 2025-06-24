@@ -11,8 +11,12 @@ const DisciplinaPage = () => {
   }, []);
 
   const carregarDisciplinas = async () => {
-    const response = await api.get('/disciplinas');
-    setDisciplinas(response.data);
+    try {
+      const response = await api.get('/disciplinas');
+      setDisciplinas(response.data);
+    } catch (error) {
+      console.error('Erro ao carregar disciplinas:', error);
+    }
   };
 
   const handleExcluir = async (id) => {
@@ -21,15 +25,23 @@ const DisciplinaPage = () => {
   };
 
   return (
-    <div>
-      <h2>Gerenciar Disciplinas</h2>
-      <button onClick={() => navigate('/disciplinas/novo')}>Incluir Nova Disciplina</button>
-      <table>
+    <div style={{ textAlign: 'center' }}>
+      <h2 style={{ color: '#fff' }}>Gerenciar Disciplinas</h2>
+
+      <button
+        onClick={() => navigate('/disciplinas/novo')}
+        className="centered-button"
+      >
+        Incluir Nova Disciplina
+      </button>
+
+      <table className="tabela">
         <thead>
           <tr>
             <th>Nome</th>
             <th>Código</th>
             <th>Curso</th>
+            <th>Período</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -39,9 +51,12 @@ const DisciplinaPage = () => {
               <td>{disciplina.nome}</td>
               <td>{disciplina.codigo}</td>
               <td>{disciplina.curso}</td>
+              <td>{disciplina.periodo}</td>
               <td>
-                <button onClick={() => navigate(`/disciplinas/editar/${disciplina.id}`)}>Editar</button>
-                <button onClick={() => handleExcluir(disciplina.id)}>Excluir</button>
+                <div className="botoes-acoes">
+                  <button onClick={() => navigate(`/disciplinas/editar/${disciplina.id}`)}>Editar</button>
+                  <button onClick={() => handleExcluir(disciplina.id)}>Excluir</button>
+                </div>
               </td>
             </tr>
           ))}

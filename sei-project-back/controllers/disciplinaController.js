@@ -5,6 +5,7 @@ exports.listar = async (req, res) => {
   if (req.query.nome) where.nome = req.query.nome;
   if (req.query.codigo) where.codigo = req.query.codigo;
   if (req.query.curso) where.curso = req.query.curso;
+  where.status = req.query.status || 'ATIVO';
   const disciplinas = await Disciplina.findAll({ where });
   res.json(disciplinas);
 };

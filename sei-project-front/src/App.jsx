@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
+import './App.css';
+
 import AlunoPage from './pages/AlunoPage';
 import AlunoFormPage from './pages/AlunoFormPage';
 import ReativarAlunosPage from './pages/ReativarAlunosPage';
@@ -15,6 +17,7 @@ import SalaFormPage from './pages/SalaFormPage';
 import ReativarSalasPage from './pages/ReativarSalasPage';
 import TurmaPage from './pages/TurmaPage';
 import TurmaFormPage from './pages/TurmaFormPage';
+import ReativarTurmasPage from './pages/ReativarTurmasPage';
 
 const linkStyle = {
   backgroundColor: '#007bff',
@@ -27,19 +30,44 @@ const linkStyle = {
 };
 
 const Home = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', fontFamily: 'Arial, sans-serif' }}>
-    <h1 style={{ marginBottom: '30px', fontSize: '2rem', color: '#fff' }}>SEI - Sistema Educacional Integrado</h1>
-    <nav style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-      <Link to="/alunos" style={linkStyle}>Gerenciar Alunos</Link>
-      <Link to="/alunos/reativar" style={linkStyle}>Reativar Alunos</Link>
-      <Link to="/professores" style={linkStyle}>Gerenciar Professores</Link>
-      <Link to="/professores/reativar" style={linkStyle}>Reativar Professores</Link>
-      <Link to="/disciplinas" style={linkStyle}>Gerenciar Disciplinas</Link>
-      <Link to="/disciplinas/reativar" style={linkStyle}>Reativar Disciplinas</Link>
-      <Link to="/salas" style={linkStyle}>Gerenciar Salas</Link>
-      <Link to="/salas/reativar" style={linkStyle}>Reativar Salas</Link>
-      <Link to="/turmas" style={linkStyle}>Gerenciar Turmas</Link>
-    </nav>
+  <div
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100vh',
+      fontFamily: 'Arial, sans-serif',
+      backgroundColor: '#1e1e1e',
+      padding: '2rem',
+      width: '100vw',
+    }}
+  >
+    <div style={{ textAlign: 'center' }}>
+      <h1 style={{ marginBottom: '30px', fontSize: '2rem', color: '#fff' }}>
+        SEI - Sistema Educacional Integrado
+      </h1>
+      <nav
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px',
+          width: '100%',
+          maxWidth: '280px',
+          margin: '0 auto',
+        }}
+      >
+        <Link to="/alunos" style={linkStyle}>Gerenciar Alunos</Link>
+        <Link to="/alunos/reativar" style={linkStyle}>Reativar Alunos</Link>
+        <Link to="/professores" style={linkStyle}>Gerenciar Professores</Link>
+        <Link to="/professores/reativar" style={linkStyle}>Reativar Professores</Link>
+        <Link to="/disciplinas" style={linkStyle}>Gerenciar Disciplinas</Link>
+        <Link to="/disciplinas/reativar" style={linkStyle}>Reativar Disciplinas</Link>
+        <Link to="/salas" style={linkStyle}>Gerenciar Salas</Link>
+        <Link to="/salas/reativar" style={linkStyle}>Reativar Salas</Link>
+        <Link to="/turmas" style={linkStyle}>Gerenciar Turmas</Link>
+        <Link to="/turmas/reativar" style={linkStyle}>Reativar Turmas</Link>
+      </nav>
+    </div>
   </div>
 );
 
@@ -48,17 +76,16 @@ const PageContainer = ({ children }) => (
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     minHeight: '100vh',
     padding: '40px',
     fontFamily: 'Arial, sans-serif',
     backgroundColor: '#1e1e1e',
+    textAlign: 'center',
   }}>
     <div style={{
       width: '100%',
-      maxWidth: '1200px',
-      minWidth: '900px',
-      textAlign: 'center',
+      maxWidth: '900px',
       margin: '0 auto',
     }}>
       {children}
@@ -93,6 +120,7 @@ const App = () => (
       <Route path="/turmas" element={<PageContainer><TurmaPage /></PageContainer>} />
       <Route path="/turmas/novo" element={<PageContainer><TurmaFormPage /></PageContainer>} />
       <Route path="/turmas/editar/:id" element={<PageContainer><TurmaFormPage /></PageContainer>} />
+      <Route path="/turmas/reativar" element={<PageContainer><ReativarTurmasPage /></PageContainer>} />
     </Routes>
   </Router>
 );

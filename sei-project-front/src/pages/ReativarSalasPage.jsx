@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 
 const ReativarSalasPage = () => {
   const [salasInativas, setSalasInativas] = useState([]);
 
   const fetchInativas = async () => {
-    const res = await api.get('/salas');
-    const filtradas = res.data.filter(s => s.status === 'INATIVO');
-    setSalasInativas(filtradas);
+    try {
+      const res = await api.get('/salas?status=INATIVO');
+      setSalasInativas(res.data);
+    } catch (error) {
+      console.error('Erro ao buscar salas inativas:', error);
+    }
   };
 
   const handleReativar = async (id) => {
-    await api.patch(`/salas/${id}/status`, { status: 'ATIVO' });
-    fetchInativas();
+    try {
+      await api.patch(`/salas/${id}/status`, { status: 'ATIVO' });
+      fetchInativas();
+    } catch (error) {
+      console.error('Erro ao reativar sala:', error);
+    }
   };
 
   useEffect(() => {
@@ -20,18 +28,31 @@ const ReativarSalasPage = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Reativar Salas</h2>
+    <div style={{ textAlign: 'center' }}>
+      <h2 style={{ color: '#fff' }}>Reativar Salas</h2>
       {salasInativas.length === 0 ? (
-        <p>Nenhuma sala inativa.</p>
+        <p style={{ color: '#fff' }}>Nenhuma sala inativa.</p>
       ) : (
-        <table>
-          <thead><tr><th>Nome</th><th>Capacidade</th><th>Ações</th></tr></thead>
+        <table className="tabela">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Capacidade</th>
+              <th>Local</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
           <tbody>
-            {salasInativas.map(s => (
+            {salasInativas.map((s) => (
               <tr key={s.id}>
-                <td>{s.nome}</td><td>{s.capacidade}</td>
-                <td><button onClick={() => handleReativar(s.id)}>Reativar</button></td>
+                <td>{s.nome}</td>
+                <td>{s.capacidade}</td>
+                <td>{s.local}</td>
+                <td>
+                  <div className="botoes-acoes">
+                    <button onClick={() => handleReativar(s.id)}>Reativar</button>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>

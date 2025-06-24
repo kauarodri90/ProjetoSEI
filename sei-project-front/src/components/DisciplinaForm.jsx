@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const DisciplinaForm = ({ onSubmit, initialData }) => {
-  const [disciplina, setDisciplina] = useState({ nome: '', codigo: '', curso: '', status: 'ATIVO' });
+  const [disciplina, setDisciplina] = useState({ nome: '', codigo: '', curso: '', periodo: '', status: 'ATIVO' });
   const [erros, setErros] = useState({});
 
   useEffect(() => {
@@ -43,6 +43,10 @@ const DisciplinaForm = ({ onSubmit, initialData }) => {
       <div>
         <input name="curso" value={disciplina.curso} onChange={handleChange} placeholder="Curso" required />
         {erros.curso && <span style={{ color: 'red' }}>{erros.curso}</span>}
+      </div>
+      <div>
+        <input name="periodo" value={disciplina.periodo || ''} onChange={handleChange} placeholder="Período" required />
+        {erros.periodo && <span style={{ color: 'red' }}>{erros.periodo}</span>}
       </div>
       <button type="submit">Salvar</button>
     </form>

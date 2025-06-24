@@ -5,6 +5,7 @@ exports.listar = async (req, res) => {
   if (req.query.curso) where.curso = req.query.curso;
   if (req.query.periodo_letivo) where.periodo_letivo = req.query.periodo_letivo;
   if (req.query.turno) where.turno = req.query.turno;
+  where.status = req.query.status || 'ATIVO';
   const turmas = await Turma.findAll({ where });
   res.json(turmas);
 };

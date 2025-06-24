@@ -11,8 +11,12 @@ const SalaPage = () => {
   }, []);
 
   const carregarSalas = async () => {
-    const response = await api.get('/salas');
-    setSalas(response.data);
+    try {
+      const response = await api.get('/salas');
+      setSalas(response.data);
+    } catch (error) {
+      console.error('Erro ao carregar salas:', error);
+    }
   };
 
   const handleExcluir = async (id) => {
@@ -21,14 +25,22 @@ const SalaPage = () => {
   };
 
   return (
-    <div>
-      <h2>Gerenciar Salas</h2>
-      <button onClick={() => navigate('/salas/novo')}>Incluir Nova Sala</button>
-      <table>
+    <div style={{ textAlign: 'center' }}>
+      <h2 style={{ color: '#fff' }}>Gerenciar Salas</h2>
+
+      <button
+        onClick={() => navigate('/salas/novo')}
+        className="centered-button"
+      >
+        Incluir Nova Sala
+      </button>
+
+      <table className="tabela">
         <thead>
           <tr>
             <th>Nome</th>
             <th>Capacidade</th>
+            <th>Local</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -37,9 +49,12 @@ const SalaPage = () => {
             <tr key={sala.id}>
               <td>{sala.nome}</td>
               <td>{sala.capacidade}</td>
+              <td>{sala.local}</td>
               <td>
-                <button onClick={() => navigate(`/salas/editar/${sala.id}`)}>Editar</button>
-                <button onClick={() => handleExcluir(sala.id)}>Excluir</button>
+                <div className="botoes-acoes">
+                  <button onClick={() => navigate(`/salas/editar/${sala.id}`)}>Editar</button>
+                  <button onClick={() => handleExcluir(sala.id)}>Excluir</button>
+                </div>
               </td>
             </tr>
           ))}

@@ -35,4 +35,4 @@ SEI/
 │   ├── Dockerfile
 │   └── ...
 ├── docker-compose.yml       # Orquestrador
-└── README.md                # Este arquivo
+└── README.md                

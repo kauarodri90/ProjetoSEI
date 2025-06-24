@@ -43,6 +43,14 @@ const TurmaForm = ({ onSubmit, initialData }) => {
         <input name="turno" value={turma.turno} onChange={handleChange} placeholder="Turno" required />
         {erros.turno && <span style={{ color: 'red' }}>{erros.turno}</span>}
       </div>
+      <div>
+        <label>Horário de Início</label>
+        <input type="time" name="horario_inicio" value={turma.horario_inicio || ''} onChange={handleChange} required />
+      </div>
+      <div>
+        <label>Horário de Término</label>
+        <input type="time" name="horario_fim" value={turma.horario_fim || ''} onChange={handleChange} required />
+      </div>
       <button type="submit">Salvar</button>
     </form>
   );
